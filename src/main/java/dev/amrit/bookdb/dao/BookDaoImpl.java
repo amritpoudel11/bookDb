@@ -5,13 +5,19 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.transaction.TransactionManager;
 import java.util.List;
 
 @Repository
 public class BookDaoImpl implements BookDAO {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public Integer save(Book book) {
@@ -25,8 +31,9 @@ public class BookDaoImpl implements BookDAO {
 
     @Override
     public List<Book> List() {
-       List<Book> bookList = sessionFactory.getCurrentSession().createQuery("from Book").list();
-       return bookList;
+       CriteriaQuery<Book> bookCriteriaQuery= em.getCriteriaBuilder().createQuery(Book.class);
+       Root<Book> root = bookCriteriaQuery.from(Book.class);
+       return em.createQuery(bookCriteriaQuery).getResultList();
     }
 
     @Override
@@ -37,5 +44,9 @@ public class BookDaoImpl implements BookDAO {
     @Override
     public void delete(Integer id) {
 
+    }
+
+    public void setEm(EntityManager em) {
+        this.em = em;
     }
 }
