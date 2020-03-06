@@ -16,9 +16,6 @@
     <!-- Base package to search for spring beans -->
     <context:component-scan base-package="dev.amrit.bookdb"/>
 
-    <mvc:interceptors>
-        <bean class="org.academiadecodigo.javabank.interceptor.LogRequestsInterceptor"/>
-    </mvc:interceptors>
 
     <import resource="persistence.xml"/>
 
