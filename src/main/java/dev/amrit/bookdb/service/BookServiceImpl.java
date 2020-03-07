@@ -16,13 +16,8 @@ public class BookServiceImpl implements BookService {
     private BookDAO bookDAO;
 
     @Override
-    public Integer save(Book book) {
-        return null;
-    }
-
-    @Override
     public Book get(Integer id) {
-        return null;
+        return bookDAO.get(id);
     }
 
     @Override
@@ -32,12 +27,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void update(Integer id, Book book) {
-
+    @Transactional
+    public Book saveOrUpdate(Book book) {
+    return bookDAO.saveOrUpdate(book);
     }
 
     @Override
+    @Transactional
     public void delete(Integer id) {
-
+        bookDAO.delete(id);
     }
 }

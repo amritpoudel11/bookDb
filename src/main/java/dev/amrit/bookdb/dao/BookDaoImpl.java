@@ -1,15 +1,12 @@
 package dev.amrit.bookdb.dao;
 
 import dev.amrit.bookdb.model.Book;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.transaction.TransactionManager;
 import java.util.List;
 
 @Repository
@@ -20,13 +17,8 @@ public class BookDaoImpl implements BookDAO {
     private EntityManager em;
 
     @Override
-    public Integer save(Book book) {
-        return null;
-    }
-
-    @Override
     public Book get(Integer id) {
-        return null;
+        return em.find(Book.class, id);
     }
 
     @Override
@@ -37,16 +29,13 @@ public class BookDaoImpl implements BookDAO {
     }
 
     @Override
-    public void update(Integer id, Book book) {
-
+    public Book saveOrUpdate(Book book) {
+        return em.merge(book);
     }
 
     @Override
     public void delete(Integer id) {
-
+        em.remove(em.find(Book.class, id));
     }
 
-    public void setEm(EntityManager em) {
-        this.em = em;
-    }
 }
