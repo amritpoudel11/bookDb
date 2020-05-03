@@ -6,6 +6,11 @@
 
     <bean class="dev.amrit.bookdb.SpringBootstrap"/>
 
+    <!--
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="locations" value="classpath:application.properties"/>
+    </bean>
+    -->
 
     <!-- Use spring servlet for all requests, including static resources -->
     <mvc:default-servlet-handler/>
@@ -15,6 +20,7 @@
 
     <!-- Base package to search for spring beans -->
     <context:component-scan base-package="dev.amrit.bookdb"/>
+
 
 
     <import resource="persistence.xml"/>

@@ -22,6 +22,10 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
+
     //get all books
     @GetMapping("/books")
     public ResponseEntity<List<Book>> getAllBooks(){

@@ -16,6 +16,10 @@ public class BookDaoImpl implements BookDAO {
     @PersistenceContext
     private EntityManager em;
 
+
+    public BookDaoImpl() {
+    }
+
     @Override
     public Book get(Integer id) {
         return em.find(Book.class, id);

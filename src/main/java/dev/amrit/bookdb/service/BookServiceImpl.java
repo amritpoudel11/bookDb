@@ -15,6 +15,10 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookDAO bookDAO;
 
+    public BookServiceImpl(BookDAO bookDAO) {
+        this.bookDAO = bookDAO;
+    }
+
     @Override
     public Book get(Integer id) {
         return bookDAO.get(id);
